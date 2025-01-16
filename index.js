@@ -1,5 +1,5 @@
-var id = null;
-var linha = null;
+var id = null
+var linha = null
 
 function incluirItem(){
     id++
