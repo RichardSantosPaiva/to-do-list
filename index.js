@@ -1,6 +1,11 @@
 var id = null
 var linha = null
 
+$('#modal-criar-item').on('hide.bs.modal', function (event) {
+    console.log('modal fechou');
+    document.getElementById("input-item").value = ""
+});
+
 function incluirItem(){
     id++
     const tarefa = document.getElementById("input-item").value
@@ -32,11 +37,6 @@ function incluirItem(){
     tr.appendChild(td1)
     tr.appendChild(td2)
     tbodyItens.appendChild(tr)
-  
-    $('#exampleModal').on('hide.bs.modal', function (event) {
-        console.log('modal fechou');
-        document.getElementById("input-item").value = ""
-    });
 }
 
 
