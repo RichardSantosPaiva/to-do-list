@@ -1,0 +1,21 @@
+#botao-criar-tarefa{
+    display: block;
+    margin: auto;
+}
+
+.tabela-customizada{
+    width: 60%;
+    margin: 0 auto;
+}
+
+input {
+    width: 100%;
+}
+td p {
+    width: 100%;
+}
+
+tr th + td {
+    display: flex;
+    gap: 20px;
+}
