@@ -25,6 +25,9 @@ tr th + td {
     margin: auto;
 }
 
+#calendario p {
+    text-align: center;
+}
 #calendario-datas {
     margin: auto;
     border: 1px solid black;
