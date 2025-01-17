@@ -5,6 +5,11 @@ $('#modal-criar-item').on('hide.bs.modal', function (evento) {
     document.getElementById("input-item").value = ""
 });
 
+document.addEventListener("DOMContentLoaded", function (event) {
+    console.log("DOM completamente carregado e analisado");
+    calendario()
+});
+
 function incluirItem(){
     id++
     const textoParagrafo = document.getElementById("input-item").value
@@ -123,3 +128,47 @@ function deletar(btn){
         btn.parentNode.parentNode.remove()
     }
 }
+
+function calendario(){
+    const container = document.getElementById("container-calendario")
+    const btnEsquerda = document.createElement("button")
+    const btnDireita = document.createElement("button")
+    const div = document.createElement("div")
+  
+    div.style.display = "flex";
+    div.style.justifyContent = "space-evenly";
+    div.style.alignItems = "center";
+
+    div.setAttribute("class","container-botao")
+
+    for(let i = 1; i<= 11; i++){
+        let arrayMeses = ["janeiro","fevereiro","março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
+        let calendario = document.createElement("div")
+        calendario.setAttribute("id","calendario")
+        let calendario_datas = document.createElement("div")
+        calendario_datas.setAttribute("id","calendario-datas")
+
+        let p = document.createElement("p");
+        p.innerText = "calendario " + arrayMeses[i]
+
+        for(let i = 1; i <= 31; i++){
+            let span = document.createElement("span")
+            span.innerText = i ;   
+            calendario_datas.appendChild(span)
+            calendario.appendChild(p) 
+            calendario.appendChild(calendario_datas)
+            container.appendChild(calendario)
+        }
+        container.appendChild(calendario)
+    }
+    
+    btnEsquerda.setAttribute("id","esquerda")
+    btnDireita.setAttribute("id","direita")
+    btnEsquerda.innerText = "<-"
+    btnDireita.innerText = "->"
+    div.appendChild(btnEsquerda)
+    div.appendChild(btnDireita)
+    div.style.display
+    container.appendChild(div)
+}
+

@@ -19,3 +19,23 @@ tr th + td {
     display: flex;
     gap: 20px;
 }
+
+#container-calendario{
+    width: 290px;
+    margin: auto;
+}
+
+#calendario-datas {
+    margin: auto;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    padding: 10px;
+}
+
+#calendario-datas span {
+    display: block;
+    padding: 10px;
+    text-align: center;
+}
