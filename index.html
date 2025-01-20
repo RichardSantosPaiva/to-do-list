@@ -1,50 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sei la mano</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sei la mano</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- Botão para abrir o modal -->
-    <button type="button" id="botao-criar-tarefa" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-criar-item">
-        Abrir modal
-    </button>
-    
-    <!-- Modal criar-->
-    <div class="modal fade" id="modal-criar-item" tabindex="-1" aria-labelledby="modal-criar-item" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modal-criar-item">Título do modal</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body">
-             <input type="text" id="input-item">
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-primary" onclick="incluirItem()">Salvar mudanças</button>
-            </div>
-        </div>
-        </div>
+  <!-- calendário-->
+  <div id="container-calendario">
+    <div id="calendario">
     </div>
-    <table class="table tabela-customizada">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Item</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody id="table-itens">
-        </tbody>
-      </table>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
+  </div>
+  <!-- Botão para abrir o modal -->
+  <button type="button" id="botao-criar-tarefa" class="btn btn-primary" data-bs-toggle="modal"
+    data-bs-target="#modal-criar-item">
+    Abrir modal
+  </button>
+  <!-- Modal criar-->
+  <div class="modal fade" id="modal-criar-item" tabindex="-1" aria-labelledby="modal-criar-item" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modal-criar-item">Título do modal</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="input-item">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary" onclick="incluirItem()">Salvar mudanças</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table tabela-customizada">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Item</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody id="table-itens">
+    </tbody>
+  </table>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+  <script>
+    /*
+    testar função
+    function anoBissexto(ano) {
+      return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    }
+
+    Testar a função
+    console.log(isLeapYear(2024)); 
+    console.log(isLeapYear(2023)); 
+    console.log(isLeapYear(2000)); 
+    console.log(isLeapYear(1900));  
+
+    function testarAnoBissexto(ano) {
+    if (anoBissexto(ano)) {
+        console.log(`${ano} é um ano bissexto.`);
+    } else {
+        console.log(`${ano} não é um ano bissexto.`);
+    }
+}
+
+  testarAnoBissexto(2025);
+
+  
+  testarAnoBissexto(2024); // Deve ser bissexto
+  testarAnoBissexto(1900); // Não é bissexto
+  testarAnoBissexto(2000); // Deve ser bissexto
+  testarAnoBissexto(2024); // Deve ser bissexto
+  */
+
+  </script>
 </body>
+
 </html>

@@ -19,3 +19,63 @@ tr th + td {
     display: flex;
     gap: 20px;
 }
+
+#container-calendario{
+    width: 290px;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#container-semana {
+display: flex;
+}
+
+.container-botao {
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#calendario p {
+    text-align: center;
+}
+
+#calendario-datas {
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+#calendario-datas button {
+    width: 35px; 
+    height: 35px; 
+    border: none;
+    background-color: transparent;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+#calendario-datas button:hover {
+    background-color: rgb(117, 179, 255); 
+    color:white;
+    font-weight: 500;
+}
+
+#calendario-datas button:active {
+    background-color: #bae5ff; 
+}
+
+#calendario-datas button.selecionado {
+    border: 2px solid rgb(0, 145, 255); 
+}
