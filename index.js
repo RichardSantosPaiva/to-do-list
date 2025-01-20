@@ -82,9 +82,7 @@ function editar(btn, id) {
             td2.appendChild(btnSalvar)
 
         }
-    } else {
-        alert("id e id do item não conferem")
-    }
+    } 
 }
 
 function salvar(id) {
@@ -124,11 +122,9 @@ function deletar(btn) {
     }
 }
 
-
-let calendario = new Date();
+let calendario = new Date()
 let anoAtual = calendario.getFullYear()
 let mesAtual = calendario.getMonth()
-
 
 function agenda(condicao) {
     let arrayMeses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]    
@@ -157,14 +153,23 @@ function agenda(condicao) {
 
     let calendario_datas = document.createElement("div");
     calendario_datas.setAttribute("id", "calendario-datas");
+    calendario_datas.innerHTML+="<p>D</p>"
+    calendario_datas.innerHTML+="<p>S</p>"
+    calendario_datas.innerHTML+="<p>T</p>"
+    calendario_datas.innerHTML+="<p>Q</p>"
+    calendario_datas.innerHTML+="<p>Q</p>"
+    calendario_datas.innerHTML+="<p>S</p>"
+    calendario_datas.innerHTML+="<p>S</p>"
 
     let p = document.createElement("p");
     p.innerText = `Calendário  ${arrayMeses[mesAtual]} ${anoAtual}`
 
     for (let i = 1; i <= 31; i++) {        
-        let span = document.createElement("span");
-        span.innerText = i;
-
+        let botao = document.createElement("button");
+        botao.setAttribute("id", `botao-${i}`)
+        botao.setAttribute("onclick", `agendar(${i})`)
+        botao.innerText = i;
+        
         if(mesAtual == 1){
             if(i == 29){
                 break 
@@ -176,10 +181,8 @@ function agenda(condicao) {
                 break
             }
         } 
-
-        calendario_datas.appendChild(span);
+        calendario_datas.appendChild(botao);
     }
-
     calendario.appendChild(p);
     calendario.appendChild(calendario_datas);
     container.appendChild(calendario);
@@ -198,7 +201,28 @@ function agenda(condicao) {
     });
 }
 
+var removerEstiloBotao = null;
+
+function agendar(dia) {
+    if (removerEstiloBotao) {
+        removerEstiloBotao.classList.remove("selecionado"); 
+    }
+
+    let botao = document.getElementById(`botao-${dia}`);
+    let id = botao.innerText; 
+    if (id.length === 2) { 
+        botao.classList.add("selecionado");
+    } else { 
+        botao.classList.add("selecionado");
+    }
+    
+    removerEstiloBotao = botao;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOM completamente carregado e analisado");
     agenda(mesAtual); 
 });
+
+
+
