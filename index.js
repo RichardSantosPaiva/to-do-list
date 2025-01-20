@@ -126,6 +126,11 @@ let calendario = new Date()
 let anoAtual = calendario.getFullYear()
 let mesAtual = calendario.getMonth()
 
+function anoBissexto(anoAtual){
+    return (anoAtual % 4 === 0 && ano % 100 !== 0) || (anoAtual % 400 === 0)
+}
+
+
 function agenda(condicao) {
     let arrayMeses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]    
     mesAtual = condicao != null ? condicao : mesAtual
@@ -162,7 +167,7 @@ function agenda(condicao) {
     calendario_datas.innerHTML+="<p>S</p>"
 
     let p = document.createElement("p");
-    p.innerText = `Calendário  ${arrayMeses[mesAtual]} ${anoAtual}`
+    p.innerText = `${arrayMeses[mesAtual]} - ${anoAtual}`
 
     for (let i = 1; i <= 31; i++) {        
         let botao = document.createElement("button");
@@ -171,9 +176,12 @@ function agenda(condicao) {
         botao.innerText = i;
         
         if(mesAtual == 1){
-            if(i == 29){
-                break 
+            if(anoBissexto(anoAtual)){
+                if(i > 29) break
+            } else {
+                if(i > 28) break
             }
+          
         }
 
         if(mesAtual == 3 || mesAtual == 5 || mesAtual == 8 || mesAtual == 10) {
