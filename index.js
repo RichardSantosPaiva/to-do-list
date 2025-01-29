@@ -122,18 +122,24 @@ function deletar(btn) {
     }
 }
 
-let calendario = new Date()
-let anoAtual = calendario.getFullYear()
-let mesAtual = calendario.getMonth()
+var calendario = new Date()
+var anoAtual = calendario.getFullYear()
+var mesReferencia = calendario.getMonth()
+console.log(mesReferencia)
+let diaAtual = new Date().getDate(); // Armazena o dia atual
+var removerEstiloBotao = null;
 
 function anoBissexto(anoAtual){
     return (anoAtual % 4 === 0 && ano % 100 !== 0) || (anoAtual % 400 === 0)
 }
-
+ 
+var dataAtual = new Date();
 
 function agenda(condicao) {
+    mesComDiaMarcado = condicao
+
     let arrayMeses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]    
-    mesAtual = condicao != null ? condicao : mesAtual
+    mesAtual = condicao != null ? condicao : mesReferencia
     
     const container = document.getElementById("container-calendario")
     container.innerHTML = ""; 
@@ -158,15 +164,18 @@ function agenda(condicao) {
 
     let calendario_datas = document.createElement("div");
     calendario_datas.setAttribute("id", "calendario-datas");
-    calendario_datas.innerHTML+="<p>D</p>"
-    calendario_datas.innerHTML+="<p>S</p>"
-    calendario_datas.innerHTML+="<p>T</p>"
-    calendario_datas.innerHTML+="<p>Q</p>"
-    calendario_datas.innerHTML+="<p>Q</p>"
-    calendario_datas.innerHTML+="<p>S</p>"
-    calendario_datas.innerHTML+="<p>S</p>"
+    calendario_datas.setAttribute("class",`mes-${mesAtual}`)
+
+    calendario_datas.innerHTML+="<p class='dias-da-semana'>D</p>"
+    calendario_datas.innerHTML+="<p class='dias-da-semana'>S</p>"
+    calendario_datas.innerHTML+="<p class='dias-da-semana'>T</p>"
+    calendario_datas.innerHTML+="<p class='dias-da-semana'>Q</p>"
+    calendario_datas.innerHTML+="<p class='dias-da-semana'>Q</p>"
+    calendario_datas.innerHTML+="<p class='dias-da-semana'>S</p>"
+    calendario_datas.innerHTML+="<p class='dias-da-semana'>S</p>"
 
     let p = document.createElement("p");
+    
     p.innerText = `${arrayMeses[mesAtual]} - ${anoAtual}`
 
     for (let i = 1; i <= 31; i++) {        
@@ -189,6 +198,12 @@ function agenda(condicao) {
                 break
             }
         } 
+
+        if (condicao === mesReferencia && i === diaAtual ) {
+            botao.classList.add("selecionado");
+            removerEstiloBotao = botao;
+        }
+
         calendario_datas.appendChild(botao);
     }
     calendario.appendChild(p);
@@ -197,11 +212,13 @@ function agenda(condicao) {
     container.appendChild(div);
 
     btnEsquerda.addEventListener("click", () => {
-        if (mesAtual > 1) { 
+        if (mesAtual > 0) { 
             agenda(mesAtual - 1);
         }
     });
 
+
+    
     btnDireita.addEventListener("click", () => {
         if (mesAtual < 12) {    
             agenda(mesAtual + 1);
@@ -209,28 +226,41 @@ function agenda(condicao) {
     });
 }
 
-var removerEstiloBotao = null;
 
-function agendar(dia) {
+function agendar(diaSelecionado) {
+    
+    let botao = document.getElementById(`botao-${diaSelecionado}`);
+    let id = botao.innerText;
+    
     if (removerEstiloBotao) {
         removerEstiloBotao.classList.remove("selecionado"); 
     }
 
-    let botao = document.getElementById(`botao-${dia}`);
-    let id = botao.innerText; 
     if (id.length === 2) { 
         botao.classList.add("selecionado");
     } else { 
         botao.classList.add("selecionado");
-    }
+    }   
     
     removerEstiloBotao = botao;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOM completamente carregado e analisado");
-    agenda(mesAtual); 
+    agenda(mesReferencia); 
+
+    setTimeout(() => {
+        let diaAtual = dataAtual.getDate();
+        let botaoDia = document.getElementById(`botao-${diaAtual}`);
+
+        if (botaoDia) {
+            botaoDia.classList.add("selecionado");
+        } else {
+            console.error(`Botão com id botao-${diaAtual} não foi encontrado.`);
+        }
+    }, 0)
+
 });
 
-
+//https://www.treinaweb.com.br/blog/slideshow-apenas-com-css  <- fazer um slide so copia o codigo
 

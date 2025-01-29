@@ -42,8 +42,10 @@ display: flex;
     justify-content: space-evenly;
 }
 
-#calendario p {
+#calendario p.dias-da-semana {
     text-align: center;
+    font-weight: 600;
+    color: red;
 }
 
 #calendario-datas {
@@ -72,10 +74,10 @@ display: flex;
     font-weight: 500;
 }
 
-#calendario-datas button:active {
-    background-color: #bae5ff; 
+#calendario-datas button.selecionado {
+    background-color: #bae5ff;
 }
 
-#calendario-datas button.selecionado {
-    border: 2px solid rgb(0, 145, 255); 
+#calendario-datas button:active {
+    border: 3px solid rgb(0, 145, 255); 
 }
