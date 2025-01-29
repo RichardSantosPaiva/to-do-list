@@ -1,3 +1,6 @@
+h1 {
+    text-align: center;
+}
 
 #botao-criar-tarefa{
     display: block;
@@ -27,7 +30,7 @@
     color:  rgb(254, 210, 88);
 }
 
-input {
+textarea {
     width: 100%;
 }
 
@@ -120,6 +123,10 @@ display: flex;
 }
 
 /*68ffc0*/
+
+.form-control {
+    height: 40px;
+}
 
 .form-control:focus {
     border-color: rgb(238, 216, 154);
