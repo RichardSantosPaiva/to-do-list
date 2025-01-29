@@ -22,10 +22,11 @@ function incluirItem() {
 
     th.innerText = id;
     th.setAttribute("scope", "row")
-
+    th.style.textAlign = "center"
     p.innerText = textoParagrafo
+    btnDeletar.setAttribute("id","deletar")
     btnDeletar.setAttribute("class", "btn btn-danger");
-    btnEditar.setAttribute("class", "btn btn-primary");
+    btnEditar.setAttribute("class", "btn btn-warning");
 
     input.setAttribute("type", "text")
     input.value = textoParagrafo
@@ -108,7 +109,7 @@ function cancelar(id) {
     btnSalvar.remove()
 
     const btnEditar = document.createElement("button")
-    btnEditar.setAttribute("class", "btn btn-primary");
+    btnEditar.setAttribute("class", "btn btn-warning");
     btnEditar.setAttribute("onclick", `editar(this, ${id})`)
     btnEditar.innerText = "Editar"
     td2.appendChild(btnEditar)
@@ -146,24 +147,26 @@ function agenda(condicao) {
 
     const btnEsquerda = document.createElement("button")
     const btnDireita = document.createElement("button")
-    btnEsquerda.setAttribute("id", "esquerda");
-    btnDireita.setAttribute("id", "direita");
-    btnEsquerda.innerText = "<-";
-    btnDireita.innerText = "->";
+    btnEsquerda.setAttribute("id", "esquerda")
+    btnDireita.setAttribute("id", "direita")
+    btnEsquerda.classList.add("btn", "btn-warning")
+    btnDireita.classList.add("btn", "btn-warning")
+    btnEsquerda.innerHTML =  "<img src='seta-esquerda.png'/>"
+    btnDireita.innerHTML = "<img src='seta-direita.png'/>"
 
-    const div = document.createElement("div");
-    div.style.display = "flex";
-    div.style.justifyContent = "space-evenly";
-    div.style.alignItems = "center";
-    div.setAttribute("class", "container-botao");
-    div.appendChild(btnEsquerda);
-    div.appendChild(btnDireita);
+    const div = document.createElement("div")
+    div.style.display = "flex"
+    div.style.justifyContent = "space-evenly"
+    div.style.alignItems = "center"
+    div.setAttribute("class", "container-botao")
+    div.appendChild(btnEsquerda)
+    div.appendChild(btnDireita)
 
-    let calendario = document.createElement("div");
-    calendario.setAttribute("id", "calendario");
+    let calendario = document.createElement("div")
+    calendario.setAttribute("id", "calendario")
 
-    let calendario_datas = document.createElement("div");
-    calendario_datas.setAttribute("id", "calendario-datas");
+    let calendario_datas = document.createElement("div")
+    calendario_datas.setAttribute("id", "calendario-datas")
     calendario_datas.setAttribute("class",`mes-${mesAtual}`)
 
     calendario_datas.innerHTML+="<p class='dias-da-semana'>D</p>"
@@ -200,7 +203,7 @@ function agenda(condicao) {
         } 
 
         if (condicao === mesReferencia && i === diaAtual ) {
-            botao.classList.add("selecionado");
+            botao.classList.add("dia-atual");
             removerEstiloBotao = botao;
         }
 
@@ -229,11 +232,12 @@ function agenda(condicao) {
 
 function agendar(diaSelecionado) {
     
+    let botaoDiaAtual = document.getElementById(`botao-${diaAtual}`);
     let botao = document.getElementById(`botao-${diaSelecionado}`);
     let id = botao.innerText;
     
     if (removerEstiloBotao) {
-        removerEstiloBotao.classList.remove("selecionado"); 
+        removerEstiloBotao.classList.remove("selecionado");
     }
 
     if (id.length === 2) { 
@@ -250,11 +254,10 @@ document.addEventListener("DOMContentLoaded", function () {
     agenda(mesReferencia); 
 
     setTimeout(() => {
-        let diaAtual = dataAtual.getDate();
         let botaoDia = document.getElementById(`botao-${diaAtual}`);
 
         if (botaoDia) {
-            botaoDia.classList.add("selecionado");
+            botaoDia.classList.add("dia-atual");
         } else {
             console.error(`Botão com id botao-${diaAtual} não foi encontrado.`);
         }

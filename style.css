@@ -1,17 +1,41 @@
+
 #botao-criar-tarefa{
     display: block;
     margin: auto;
 }
 
+#botao-criar-tarefa {
+    font-weight: 500;
+}
+
+#deletar {
+    height: 39px;
+}
 .tabela-customizada{
+    background-color: rgb(51, 50, 50);
     width: 60%;
     margin: 0 auto;
+}
+
+.tabela-customizada th, 
+.tabela-customizada td {
+    background-color: rgb(51, 50, 50); /* Fundo das células */
+}
+
+
+.tabela-customizada th {
+    color:  rgb(254, 210, 88);
 }
 
 input {
     width: 100%;
 }
+
 td p {
+    background-color: white;
+    border-radius:5px ;
+    padding: 2%;
+    text-wrap: wrap;
     width: 100%;
 }
 
@@ -20,15 +44,20 @@ tr th + td {
     gap: 20px;
 }
 
+/*calendario*/
+
 #container-calendario{
-    width: 290px;
-    margin: auto;
+    background-color: rgb(51, 50, 50);
     border: 1px solid black;
     border-radius: 20px;
+    color: rgb(254, 210, 88);
+    width: 290px;
+    margin: auto;
     padding: 10px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 #container-semana {
@@ -42,10 +71,14 @@ display: flex;
     justify-content: space-evenly;
 }
 
+.container-botao img {
+    width: 20px;
+    height: 15px;
+}
+
 #calendario p.dias-da-semana {
     text-align: center;
     font-weight: 600;
-    color: red;
 }
 
 #calendario-datas {
@@ -53,13 +86,14 @@ display: flex;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
+    gap: 4px;
 }
 
 #calendario-datas button {
     width: 35px; 
     height: 35px; 
     border: none;
-    background-color: transparent;
+    background-color: white;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -69,15 +103,25 @@ display: flex;
 }
 
 #calendario-datas button:hover {
-    background-color: rgb(117, 179, 255); 
-    color:white;
+    background-color: rgb(254, 210, 88); 
     font-weight: 500;
 }
 
 #calendario-datas button.selecionado {
-    background-color: #bae5ff;
+    background-color:  rgb(254, 210, 88);
+}
+
+#calendario-datas button.dia-atual {
+    background-color: rgb(224, 254, 88);
 }
 
 #calendario-datas button:active {
     border: 3px solid rgb(0, 145, 255); 
 }
+
+/*68ffc0*/
+
+.form-control:focus {
+    border-color: rgb(238, 216, 154);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgb(254, 210, 88);
+  }
