@@ -114,7 +114,6 @@ function cancelar(id) {
     btnEditar.setAttribute("onclick", `editar(this, ${id})`)
     btnEditar.innerText = "Editar"
     td2.appendChild(btnEditar)
-
 }
 
 function deletar(btn) {
@@ -124,112 +123,122 @@ function deletar(btn) {
     }
 }
 
-var calendario = new Date()
-var anoAtual = calendario.getFullYear()
-var mesReferencia = calendario.getMonth()
-console.log(mesReferencia)
-let diaAtual = new Date().getDate(); // Armazena o dia atual
+var calendario = new Date();
+var anoAtual = calendario.getFullYear();
+var mesReferencia = calendario.getMonth();
+let diaAtual = new Date().getDate(); 
 var removerEstiloBotao = null;
+var botaoListaAnoReferencia = null;
 
-function anoBissexto(anoAtual){
-    return (anoAtual % 4 === 0 && ano % 100 !== 0) || (anoAtual % 400 === 0)
+function anoBissexto(anoAtual) {
+    return (anoAtual % 4 === 0 && anoAtual % 100 !== 0) || (anoAtual % 400 === 0);
 }
- 
-var dataAtual = new Date();
+
+function primeiroDiaDoMes(ano, mes) {
+    return new Date(ano, mes, 1).getDay(); 
+}
 
 function agenda(condicao) {
-    mesComDiaMarcado = condicao
+    mesComDiaMarcado = condicao;
 
-    let arrayMeses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]    
-    mesAtual = condicao != null ? condicao : mesReferencia
-    
-    const container = document.getElementById("container-calendario")
+    let arrayMeses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+    mesAtual = condicao != null ? condicao : mesReferencia;
+
+    const container = document.getElementById("container-calendario");
     container.innerHTML = ""; 
 
-    const btnEsquerda = document.createElement("button")
-    const btnDireita = document.createElement("button")
-    btnEsquerda.setAttribute("id", "esquerda")
-    btnDireita.setAttribute("id", "direita")
-    btnEsquerda.classList.add("btn", "btn-warning")
-    btnDireita.classList.add("btn", "btn-warning")
-    btnEsquerda.innerHTML =  "<img src='seta-esquerda.png'/>"
-    btnDireita.innerHTML = "<img src='seta-direita.png'/>"
+    let h5 = document.createElement("h5");
+    h5.setAttribute("id", "titulo");
+    h5.innerText = `${arrayMeses[mesAtual]}`; 
 
-    const div = document.createElement("div")
-    div.style.display = "flex"
-    div.style.justifyContent = "space-evenly"
-    div.style.alignItems = "center"
-    div.setAttribute("class", "container-botao")
-    div.appendChild(btnEsquerda)
-    div.appendChild(btnDireita)
+    let botaoListaAno = document.createElement("button");
+    botaoListaAno.setAttribute("id", `lista-ano`);
+    botaoListaAno.setAttribute("class", "btn btn-warning"); 
 
-    let calendario = document.createElement("div")
-    calendario.setAttribute("id", "calendario")
+    botaoListaAno.innerHTML = anoAtual;
 
-    let calendario_datas = document.createElement("div")
-    calendario_datas.setAttribute("id", "calendario-datas")
-    calendario_datas.setAttribute("class",`mes-${mesAtual}`)
+    h5.appendChild(botaoListaAno);
 
-    calendario_datas.innerHTML+="<p class='dias-da-semana'>D</p>"
-    calendario_datas.innerHTML+="<p class='dias-da-semana'>S</p>"
-    calendario_datas.innerHTML+="<p class='dias-da-semana'>T</p>"
-    calendario_datas.innerHTML+="<p class='dias-da-semana'>Q</p>"
-    calendario_datas.innerHTML+="<p class='dias-da-semana'>Q</p>"
-    calendario_datas.innerHTML+="<p class='dias-da-semana'>S</p>"
-    calendario_datas.innerHTML+="<p class='dias-da-semana'>S</p>"
+    container.appendChild(h5);
 
-    let p = document.createElement("p");
+    const btnEsquerda = document.createElement("button");
+    const btnDireita = document.createElement("button");
+    btnEsquerda.setAttribute("id", "esquerda");
+    btnDireita.setAttribute("id", "direita");
+    btnEsquerda.classList.add("btn", "btn-warning");
+    btnDireita.classList.add("btn", "btn-warning");
+    btnEsquerda.innerHTML = "<img src='seta-esquerda.png'/>";
+    btnDireita.innerHTML = "<img src='seta-direita.png'/>";
+
+    const div = document.createElement("div");
+    div.style.display = "flex";
+    div.style.justifyContent = "space-evenly";
+    div.style.alignItems = "center";
+    div.setAttribute("class", "container-botao");
     
-    p.innerText = `${arrayMeses[mesAtual]} - ${anoAtual}`
+    div.appendChild(btnEsquerda);
+    div.appendChild(btnDireita);
 
-    for (let i = 1; i <= 31; i++) {        
-        let botao = document.createElement("button");
-        botao.setAttribute("id", `botao-${i}`)
-        botao.setAttribute("onclick", `agendar(${i})`)
-        botao.innerText = i;
+    let calendario_datas = document.createElement("div");
+    calendario_datas.setAttribute("id", "calendario-datas");
+    calendario_datas.setAttribute("class", `mes-${mesAtual}`);
+
+    ["D", "S", "T", "Q", "Q", "S", "S"].forEach(dia => {
+        let p = document.createElement("p");
+        p.className = 'dias-da-semana';
+        p.innerText = dia;
+        calendario_datas.appendChild(p);
+    });
+
+   const primeiroDia = primeiroDiaDoMes(anoAtual, mesAtual);
+   const totalDiasNoMes = new Date(anoAtual, mesAtual + 1, 0).getDate(); 
+
+   for (let i = 0; i < primeiroDia; i++) {
+       const vazio = document.createElement("p"); 
+       vazio.innerText = ""; 
+       calendario_datas.appendChild(vazio);
+   }
+
+   for (let i = 1; i <= totalDiasNoMes; i++) {
+       let botao = document.createElement("button");
+       botao.setAttribute("id", `botao-${i}`);
+       botao.setAttribute("onclick", `agendar(${i})`);
+       botao.innerText = i;
+
+       if (condicao === mesReferencia && i === diaAtual) {
+           botao.classList.add("dia-atual");
+           removerEstiloBotao = botao;
+       }
+       calendario_datas.appendChild(botao);
+   }
+
+   container.appendChild(calendario_datas); 
+   container.appendChild(div); 
+
+   btnEsquerda.addEventListener("click", () => {
+       if (mesAtual > 0) agenda(mesAtual - 1)
+   });
+
+   btnDireita.addEventListener("click", () => {
+       if (mesAtual < 11)  agenda(mesAtual + 1);
+   });
+
+   $(document).ready(function(){
+        $("#lista-ano").click(function(){
+            listaAno(anoAtual)
+           
+            let containerCalendario = $("#container-calendario");
         
-        if(mesAtual == 1){
-            if(anoBissexto(anoAtual)){
-                if(i > 29) break
-            } else {
-                if(i > 28) break
-            }
-          
-        }
+            containerCalendario.on("mouseleave", function() {
+                $(".lista-ano").fadeOut(1000, function() {
+                    $(this).remove(); 
+                });
+            });
+         });
+       
+   });
 
-        if(mesAtual == 3 || mesAtual == 5 || mesAtual == 8 || mesAtual == 10) {
-            if(i == 31){
-                break
-            }
-        } 
-
-        if (condicao === mesReferencia && i === diaAtual ) {
-            botao.classList.add("dia-atual");
-            removerEstiloBotao = botao;
-        }
-
-        calendario_datas.appendChild(botao);
-    }
-    calendario.appendChild(p);
-    calendario.appendChild(calendario_datas);
-    container.appendChild(calendario);
-    container.appendChild(div);
-
-    btnEsquerda.addEventListener("click", () => {
-        if (mesAtual > 0) { 
-            agenda(mesAtual - 1);
-        }
-    });
-
-
-    
-    btnDireita.addEventListener("click", () => {
-        if (mesAtual < 12) {    
-            agenda(mesAtual + 1);
-        }
-    });
 }
-
 
 function agendar(diaSelecionado) {
     
@@ -250,21 +259,40 @@ function agendar(diaSelecionado) {
     removerEstiloBotao = botao;
 }
 
+function listaAno(ano) {
+    const containerCalendario = document.getElementById("container-calendario");
+
+    if ($(".lista-ano").length) $(".lista-ano").remove();
+    
+    const listaDiv = document.createElement("div"); 
+    listaDiv.setAttribute("class", "lista-ano");
+    
+    for (let i = 0; i <= 30; i++) {
+        let botao = document.createElement("button");
+        botao.setAttribute("class", `selecionando`);
+        botao.setAttribute("id", `${i}`);
+        botao.setAttribute("onclick", `selecionar(this)`);
+        botao.innerHTML = i + ano;
+        listaDiv.appendChild(botao);   
+    }
+    containerCalendario.appendChild(listaDiv);
+    
+    $(listaDiv).hide().fadeIn(1000)
+ 
+}
+
+function selecionar(botao) {
+        var e = document.getElementsByClassName("selecionando");  
+        $(botao.parentNode).fadeOut(1000)            
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOM completamente carregado e analisado");
-    agenda(mesReferencia); 
+   console.log("DOM completamente carregado e analisado");
+   agenda(mesReferencia); 
 
-    setTimeout(() => {
-        let botaoDia = document.getElementById(`botao-${diaAtual}`);
-
-        if (botaoDia) {
-            botaoDia.classList.add("dia-atual");
-        } else {
-            console.error(`Botão com id botao-${diaAtual} não foi encontrado.`);
-        }
-    }, 0)
+   setTimeout(() => {
+       let botaoDia = document.getElementById(`botao-${diaAtual}`);
+       if (botaoDia) botaoDia.classList.add("dia-atual")
+   }, 0)
 
 });
-
-//https://www.treinaweb.com.br/blog/slideshow-apenas-com-css  <- fazer um slide so copia o codigo
-
